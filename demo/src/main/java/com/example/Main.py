@@ -2,6 +2,8 @@ from BubbleSort import bubble_sort
 from QuickSort import quick_sort
 from MergeSort import merge_sort
 import time
+import sys
+
 
 
 
@@ -39,18 +41,75 @@ def read_tal1():
 
     return result
 
+def printRes(fil, t0, t1):
+    tRes = t1 -t0
 
-def main():
+    with open(fil, 'w') as f:
+        f.write(str(tRes))
+
+
+
+def main(args):
+
+    fil = args[0]
+    metod = args[1]
+    nbrTimes = int(args[2])
+
+    fileStr = "C:\\Users\\erikp\\jt\\dataUP\\ord1.txt"
+
 
     arrD = read_tal1()
     arrStr = read_ord1()
-    t0 = time.time_ns()
-    bubble_sort(arrStr)
+
+    for i in range(nbrTimes):
+        if(fil == "ord"):
+            if(metod == "bubble"):
+                t0 = int(time.time_ns() *1000)
+                arrStr = read_ord1()
+                bubble_sort(arrStr)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+            elif(metod == "quick"):
+                t0 = int(time.time_ns() *1000)
+                arrStr = read_ord1()
+                quick_sort(arrStr)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+            elif(metod == "merge"):
+                t0 = int(time.time_ns() *1000)
+                arrStr = read_ord1()
+                merge_sort(arrStr)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+        elif(fil == "tal"):
+            if(metod == "bubble"):
+                t0 = int(time.time_ns() *1000)
+                arrD = read_tal1()
+                bubble_sort(arrD)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+            elif(metod == "quick"):
+                t0 = int(time.time_ns() *1000)
+                arrD = read_tal1()
+                quick_sort(arrD)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+            elif(metod == "merge"):
+                t0 = int(time.time_ns() *1000)
+                arrD = read_tal1()
+                merge_sort(arrD)
+                t1 = int(time.time_ns() *1000)
+                printRes(fileStr, t0, t1)
+
+
     
-    t1 = time.time_ns()
-    tRes = t1 -t0 
-    print(tRes)
 
 
-main()
+if __name__ == "__main__":
+    main(sys.argv[1:])
 

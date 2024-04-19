@@ -7,20 +7,91 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         
+        String file = args[0];
+        String metod = args[1];
+        Integer nbrTimes = Integer.parseInt(args[2]);
 
-        double[] arrD = readTal1();
-        String[] arrStr = readOrd1();
-        long t0 = System.nanoTime();
+        String toFile = "utfil.txt";
+
+
+
+        double[] arrD = {};
+        String[] arrStr = {};
+        for(int i = 0; i < nbrTimes; i++){
+            if(file == "ord"){
+                arrStr = readOrd1();
+                if(metod == "bubble"){
+                    long t0 = System.currentTimeMillis();
+                    BubbleSort.bubbleSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                } else if(metod == "merge"){
+                    long t0 = System.currentTimeMillis();
+                    MergeSort.mergeSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                } else if (metod == "quick"){
+                    long t0 = System.currentTimeMillis();
+                    QuickSort.quickSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                }
+            } else if (file == "tal"){
+                arrD = readTal1();
+                if(metod == "bubble"){
+                    long t0 = System.currentTimeMillis();
+                    BubbleSort.bubbleSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                } else if(metod == "merge"){
+                    long t0 = System.currentTimeMillis();
+                    MergeSort.mergeSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                } else if (metod == "quick"){
+                    long t0 = System.currentTimeMillis();
+                    QuickSort.quickSortString(arrStr);
+                    long t1 = System.currentTimeMillis();
+
+                    timePrint(toFile, t0, t1);
+                }
+
+            }
+        }
+
+        //long t0 = System.nanoTime();
+
+        
         //MergeSort.mergeSortDouble(readTal1());
         //MergeSort.mergeSortString(readOrd1());
         //QuickSort.quickSortDouble(readTal1());
         //QuickSort.quickSortString(readOrd1());
         //BubbleSort.bubbleSortDouble(arrD);
-        BubbleSort.bubbleSortString(arrStr);
-        long t1 = System.nanoTime();
-        long tRes = t1 - t0;
-        System.out.println(tRes);
+        //BubbleSort.bubbleSortString(arrStr);
+        //long t1 = System.nanoTime();
+        //long tRes = t1 - t0;
+        //System.out.println(tRes);
 
+    }
+
+    public static void timePrint(String toFile, long t0, long t1){
+        try{
+            FileOutputStream fos = new FileOutputStream(toFile);
+            FileWriter writer = new FileWriter(toFile);
+
+            Long tRes = t1 -t0;
+
+            fos.write((String.valueOf(tRes) + "\n").getBytes("UTF-8"));
+            fos.close();
+
+        } catch (IOException e){
+            System.out.println("hej");
+        }
     }
 
     public static void printTal1(){
